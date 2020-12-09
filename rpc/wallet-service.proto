@@ -1,0 +1,85 @@
+syntax = "proto3";
+option go_package = ".;rpc";
+
+service WalletService {
+  rpc GetWalletAmounts(GetWalletAmountsRequest) returns (GetWalletAmountsResponse) {}
+  rpc GetWalletAmount(GetWalletAmountRequest) returns (GetWalletAmountResponse) {}
+
+  rpc SendMoney(SendMoneyRequest) returns (SendMoneyResponse) {}
+  rpc PayoutOrder(PayoutOrderRequest) returns (PayoutOrderResponse) {}
+  rpc CompensateInvoice(CompensateInvoiceRequest) returns (CompensateInvoiceResponse) {}
+  rpc PerformRefund(PerformRefundRequest) returns (PerformRefundResponse) {}
+
+  rpc StartSimplePayOrderPayout(StartSimplePayOrderPayoutRequest) returns (StartSimplePayOrderResponse) {}
+}
+
+message StartSimplePayOrderPayoutRequest {
+  string companyID = 1;
+  string email = 2;
+  int32 amount = 3;
+  string redirectURL = 4;
+  int32 orderID = 5;
+}
+
+message StartSimplePayOrderResponse {
+  string payoutURL = 1;
+}
+
+message GetWalletAmountsRequest {
+  repeated string company_ids = 1;
+}
+
+message GetWalletAmountsResponse {
+  map<string, int32> companyWallets = 1;
+}
+
+message GetWalletAmountRequest {
+  string company_id = 1;
+}
+
+message GetWalletAmountResponse {
+  int32 companyWallet = 1;
+}
+
+message SendMoneyRequest {
+  string senderID = 1;
+  string receiverID = 2;
+  int32 amount = 3;
+}
+
+message SendMoneyResponse {
+
+
+}message PayoutOrderRequest {
+  string orderID = 1;
+  string preInvoiceID = 2;
+  string clientID = 3;
+  map<string, int32> amounts = 5;
+}
+
+message PayoutOrderResponse {
+}
+
+message CompensateInvoiceRequest {
+  string orderID = 1;
+  string preInvoiceID = 2;
+  string invoiceID = 3;
+  string clientID = 4;
+  int32 amount = 5;
+}
+
+message CompensateInvoiceResponse {
+}
+
+message PerformRefundRequest {
+  string orderID = 1;
+  string preInvoiceID = 2;
+  string invoiceID = 3;
+  string complaintID = 4;
+  string plantationID = 5;
+  string clientID = 6;
+  int32 amount = 7;
+}
+
+message PerformRefundResponse {
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+option go_package = ".;rpc";
+
+service TradingService {
+  rpc SetOrderStatusPaid(SetOrderStatusPaidRequest) returns (SetOrderStatusPaidReply) {}
+  rpc GetOrderInvoice(GetOrderInvoiceRequest) returns (GetOrderInvoiceReply) {}
+}
+
+message SetOrderStatusPaidRequest {
+  int32 OrderID = 1;
+}
+
+message SetOrderStatusPaidReply {
+}
+
+message GetOrderInvoiceRequest {
+  int32 OrderID = 1;
+}
+
+message GetOrderInvoiceReply {
+  int32 total = 1;
+  int32 commission = 2;
+  int32 delivery = 3;
+  map<string, int32> plantationRequests = 4;
+}
