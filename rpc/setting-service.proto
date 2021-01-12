@@ -26,6 +26,13 @@ message GetCargoByIDReply {
   string toCountry = 3;
   int32 preInvoicePrice = 4;
   int32 pathTime = 5;
+  repeated Handler handlers = 6;
+}
+
+message Handler{
+  string id = 1;
+  string title = 2;
+  int32 preCoolingPrice = 3;
 }
 
 message GetBasicSettingsReply {
