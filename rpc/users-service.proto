@@ -87,6 +87,7 @@ message GetCompanyByIDReply {
   string Phone = 8;
   string Email = 9;
   string Site = 10;
+  string HandlerID = 11;
 }
 
 message GetCompanyUsersByIDReply {
