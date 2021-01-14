@@ -88,6 +88,13 @@ message GetCompanyByIDReply {
   string Email = 9;
   string Site = 10;
   string HandlerID = 11;
+  TruckInfo TruckInfo = 12;
+}
+
+message TruckInfo {
+  string title = 1;
+  string phone = 2;
+  string contact_name = 3;
 }
 
 message GetCompanyUsersByIDReply {
