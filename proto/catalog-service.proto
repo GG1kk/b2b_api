@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option go_package = "rpc/catalog;catalog";
+
+service CatalogService {
+  rpc GetCatalogProductByID(GetCatalogProductByIDRequest) returns (GetCatalogProductByIDReply);
+  rpc GetSizeInfo(GetSizeInfoRequest) returns (GetSizeInfoReply);
+  rpc GetCurrentSeasonByPlantationID(GetCurrentSeasonByPlantationIDRequest) returns (GetCurrentSeasonByPlantationIDReply);
+}
+
+message GetCatalogProductByIDRequest {
+  string id = 1;
+}
+
+message GetCurrentSeasonByPlantationIDRequest {
+  string plantation_id = 1;
+}
+
+message GetCurrentSeasonByPlantationIDReply {
+  double base_multiplier = 1;
+  map<string, VarietyToSize> modifiers = 2;
+}
+
+message VarietyToSize {
+  map<string, SizeToModifier> dictionary = 1;
+}
+
+message SizeToModifier {
+  map<string, Modifier> dictionary = 1;
+}
+
+message Modifier {
+  int32 price = 1;
+  int32 in_pack = 2;
+  int32 in_full_box = 3;
+}
+
+message GetSizeInfoRequest {
+  string plantation_id = 1;
+  string catalog_product_id = 2;
+  string product_variety_id = 3;
+  string size = 4;
+}
+
+message GetSizeInfoReply {
+  int32 price = 1;
+  int32 in_pack = 2;
+  int32 in_full_box = 3;
+}
+
+message GetCatalogProductByIDReply {
+  string product_name = 1;
+  map<string, string> variety_names = 2;
+  map<string, string> variety_images = 3;
+  map<string, string> variety_color_hexs = 4;
+}

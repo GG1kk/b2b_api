@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option go_package = "rpc/setting;setting";
+
+service SettingsService {
+  rpc GetPlantationIdsWithDisplayEnabled(Empty) returns (GetPlantationIdsWithDisplayEnabledReply);
+  rpc GetCargoByID(GetCargoByIDRequest) returns (GetCargoByIDReply);
+  rpc GetBasicSettings(Empty) returns (GetBasicSettingsReply);
+  rpc GetCountryCode(GetCountryCodeRequest) returns (GetCountryCodeReply);
+}
+
+message GetCountryCodeRequest {
+  string country_name = 1;
+}
+
+message GetCountryCodeReply {
+  string country_code = 1;
+}
+
+message GetCargoByIDRequest {
+  string cargo_id = 1;
+}
+
+message GetCargoByIDReply {
+  string id = 1;
+  string to_city = 2;
+  string to_country = 3;
+  int32 pre_invoice_price = 4;
+  int32 path_time = 5;
+  repeated Handler handlers = 6;
+}
+
+message Handler {
+  string id = 1;
+  string title = 2;
+  int32 pre_cooling_price = 3;
+}
+
+message GetBasicSettingsReply {
+  string id = 1;
+  repeated Period periods = 2;
+  repeated bool working_days = 3;
+  int32 order_pay_timer = 4;
+  int32 order_accept_timer = 5;
+  int32 screen_refresh_timer = 6;
+}
+
+message Period {
+  int32 starts_at = 1;
+  int32 ends_at = 2;
+}
+
+message GetPlantationIdsWithDisplayEnabledReply {
+  repeated string plantation_ids = 1;
+}
+
+message Empty {}

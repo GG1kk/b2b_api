@@ -1,0 +1,46 @@
+excludes:
+  - vendor
+  - gen
+  - .idea
+  - .git
+  - docs
+  - bin
+  - venv
+  - rest
+
+protoc:
+  version: 3.14.0
+
+lint:
+  group: google
+  rules:
+    remove:
+      - FILE_OPTIONS_REQUIRE_JAVA_MULTIPLE_FILES
+      - FILE_OPTIONS_REQUIRE_JAVA_PACKAGE
+      - FILE_OPTIONS_REQUIRE_JAVA_OUTER_CLASSNAME
+      - FILE_OPTIONS_REQUIRE_PHP_NAMESPACE
+      - FILE_OPTIONS_REQUIRE_OBJC_CLASS_PREFIX
+      - FILE_OPTIONS_REQUIRE_CSHARP_NAMESPACE
+
+generate:
+  go_options:
+    import_path: ./proto
+  plugins:
+    - name: go
+      type: go
+      output: .
+    - name: go-grpc
+      type: go
+      output: .
+#    - name: grpc-gateway
+#      type: go
+#      output: go
+#    - name: swagger
+#      output: swagger
+#    - name: validate
+#      type: go
+#      flags: lang=go
+#      output: go
+#    - name: doc
+#      flags: html,index.html
+#      output: docs
