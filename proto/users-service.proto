@@ -82,6 +82,7 @@ message GetCompanyByIDReply {
   string site = 10;
   string handler_id = 11;
   TruckInfo truck_info = 12;
+  string cargo_name = 13;
 }
 
 message TruckInfo {
