@@ -203,6 +203,7 @@ message Company {
   string legal_name = 2;
   string commercial_name = 3;
   string handler_id = 4;
+  string cargo_name = 5;
 }
 
 message DropdownUser {
