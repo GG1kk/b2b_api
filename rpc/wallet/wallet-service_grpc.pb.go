@@ -313,5 +313,5 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/wallet-service.proto",
+	Metadata: "wallet-service.proto",
 }

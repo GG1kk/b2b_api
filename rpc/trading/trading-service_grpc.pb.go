@@ -133,5 +133,5 @@ var TradingService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/trading-service.proto",
+	Metadata: "trading-service.proto",
 }

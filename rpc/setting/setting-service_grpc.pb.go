@@ -205,5 +205,5 @@ var SettingsService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/setting-service.proto",
+	Metadata: "setting-service.proto",
 }

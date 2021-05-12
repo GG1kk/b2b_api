@@ -1,0 +1,11 @@
+---
+version: v1beta1
+
+plugins:
+
+  # Go
+  - name: go
+    out: .
+
+  - name: go-grpc
+    out: .
