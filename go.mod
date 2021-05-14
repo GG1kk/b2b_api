@@ -1,4 +1,4 @@
-module gitlab.com/Pahan84/api/v2
+module gitlab.com/Pahan84/api
 
 go 1.15
 
