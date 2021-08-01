@@ -154,6 +154,8 @@ message CheckTokenIsPlantationGroupWithUserAndCompanyReply {
   bool is_valid = 1;
   User user = 2;
   Company company = 3;
+  User manager = 5;
+  Company manager_company = 6;
 }
 
 message CheckTokenIsPlantationGroupWithUserAndCompanyAndCompanyUserIDsReply {
@@ -161,6 +163,8 @@ message CheckTokenIsPlantationGroupWithUserAndCompanyAndCompanyUserIDsReply {
   User user = 2;
   Company company = 3;
   repeated string user_ids = 4;
+  User manager = 5;
+  Company manager_company = 6;
 }
 
 message CheckTokenIsPlantationGroupWithUserAndCompanyAndCompanyUsersDropdownReply {
@@ -168,6 +172,8 @@ message CheckTokenIsPlantationGroupWithUserAndCompanyAndCompanyUsersDropdownRepl
   User user = 2;
   Company company = 3;
   repeated DropdownUser managed_users = 4;
+  User manager = 5;
+  Company manager_company = 6;
 }
 
 message CheckTokenIsClientGroupWithUserAndCompanyAndCompanyUserIDsReply {
@@ -175,6 +181,8 @@ message CheckTokenIsClientGroupWithUserAndCompanyAndCompanyUserIDsReply {
   User user = 2;
   Company company = 3;
   repeated string user_ids = 4;
+  User manager = 5;
+  Company manager_company = 6;
 }
 
 message CheckTokenIsClientGroupWithUserAndCompanyAndCompanyUsersDropdownReply {
@@ -182,12 +190,16 @@ message CheckTokenIsClientGroupWithUserAndCompanyAndCompanyUsersDropdownReply {
   User user = 2;
   Company company = 3;
   repeated DropdownUser managed_users = 4;
+  User manager = 5;
+  Company manager_company = 6;
 }
 
 message CheckTokenIsClientGroupWithUserAndCompanyReply {
   bool is_valid = 1;
   User user = 2;
   Company company = 3;
+  User manager = 5;
+  Company manager_company = 6;
 }
 
 message User {

@@ -1,9 +1,8 @@
 module gitlab.com/Pahan84/api
 
-go 1.15
+go 1.16
 
 require (
-	github.com/golang/protobuf v1.5.0
-	google.golang.org/grpc v1.37.1
-	google.golang.org/protobuf v1.26.0
+	google.golang.org/grpc v1.39.0
+	google.golang.org/protobuf v1.27.1
 )
