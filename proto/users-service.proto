@@ -50,6 +50,8 @@ message CheckTokenRequest {
 
 message GetUserByIDReply {
   string email = 1;
+  string manager_id = 2;
+  string manager_company_id =3;
 }
 
 message CheckTokenWithUserReturnedRequest {
