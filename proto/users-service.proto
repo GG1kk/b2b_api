@@ -22,10 +22,23 @@ service UsersService {
   rpc GetCompaniesByCountry(GetCompaniesByCountryRequest) returns (GetCompaniesByCountryReply);
   rpc GetBrokerCommissionByID(GetBrokerCommissionByIDRequest) returns (GetBrokerCommissionByIDReply);
   rpc DecodeToken(DecodeTokenRequest) returns (DecodeTokenReply);
+
+  rpc GetAllPlantation(GetPlantationsRequest) returns (GetPlantationsReply);
 }
 
 message GetUserByIDRequest {
   string id = 1;
+}
+
+message GetPlantationsReply {
+  string id = 1;
+  string legal_name = 2;
+  string commercial_name = 3;
+  string country = 4;
+}
+
+message GetPlantationsRequest {
+  int32 type = 1;
 }
 
 message GetCompaniesByCountryRequest {
