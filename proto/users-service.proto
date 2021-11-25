@@ -22,6 +22,19 @@ service UsersService {
   rpc GetCompaniesByCountry(GetCompaniesByCountryRequest) returns (GetCompaniesByCountryReply);
   rpc GetBrokerCommissionByID(GetBrokerCommissionByIDRequest) returns (GetBrokerCommissionByIDReply);
   rpc DecodeToken(DecodeTokenRequest) returns (DecodeTokenReply);
+
+  rpc GetCompaniesByType(GetCompaniesByTypeRequest) returns (GetCompaniesByTypeReply);
+}
+
+message GetCompaniesByTypeReply {
+  string id = 1;
+  string legal_name = 2;
+  string commercial_name = 3;
+  string country = 4;
+}
+
+message GetCompaniesByTypeRequest {
+  int32 type = 1;
 }
 
 message GetUserByIDRequest {
