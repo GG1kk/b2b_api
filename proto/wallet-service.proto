@@ -10,7 +10,17 @@ service WalletService {
   rpc CompensateInvoice(CompensateInvoiceRequest) returns (CompensateInvoiceResponse);
   rpc PerformRefund(PerformRefundRequest) returns (PerformRefundResponse);
   rpc StartSimplePayOrderPayout(StartSimplePayOrderPayoutRequest) returns (StartSimplePayOrderResponse);
+  rpc CreateWalletForNewCompany(NewCompanyRequest) returns (CreateWalletForNewCompanyResponse);
 }
+
+message NewCompanyRequest {
+  string id = 1;
+}
+
+message CreateWalletForNewCompanyResponse {
+  bool status = 1;
+}
+
 
 message StartSimplePayOrderPayoutRequest {
   string company_id = 1;
