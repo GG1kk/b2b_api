@@ -1,10 +1,12 @@
 syntax = "proto3";
 
 option go_package = "rpc/trading;trading";
+// protoc --go_out=. --go-grpc_out=. proto/users.proto
 
 service TradingService {
   rpc SetOrderStatusPaid(SetOrderStatusPaidRequest) returns (SetOrderStatusPaidReply);
   rpc GetOrderInvoice(GetOrderInvoiceRequest) returns (GetOrderInvoiceReply);
+  rpc GetOrderById(GetOrderInvoiceRequest) returns (GetOrderByIdResponse);
 }
 
 message SetOrderStatusPaidRequest {
@@ -22,4 +24,35 @@ message GetOrderInvoiceReply {
   int32 commission = 2;
   int32 delivery = 3;
   map<string, int32> plantation_requests = 4;
+}
+
+message GetOrderByIdRequest {
+  int32 id = 1;
+}
+
+message GetOrderByIdResponse {
+  int32 orderId = 1;
+  string clientCompanyId = 2;
+  int32 paymentType = 3;
+  int32 orderStatus = 4;
+  string processedAt = 5;
+  string cargoId = 6;
+  string preInvoiceId = 7;
+  string invoiceId = 8;
+  int32 deliveryPrice = 9;
+  int32 fullBoxesQuantity = 10;
+  repeated Invoices invoices = 11;
+}
+
+message Invoices {
+  string plantationId = 1;
+  repeated Position positions = 2;
+}
+
+message Position {
+  int32 amountOfStems = 1;
+  string productName = 2;
+  string varietyName = 3;
+  string varietySize = 4;
+  int32 typeOfLot = 5;
 }
