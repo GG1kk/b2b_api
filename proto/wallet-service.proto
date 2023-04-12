@@ -11,6 +11,7 @@ service WalletService {
   rpc PerformRefund(PerformRefundRequest) returns (PerformRefundResponse);
   rpc StartSimplePayOrderPayout(StartSimplePayOrderPayoutRequest) returns (StartSimplePayOrderResponse);
   rpc CreateWalletForNewCompany(NewCompanyRequest) returns (CreateWalletForNewCompanyResponse);
+  rpc ComplaintCompensation(ComplaintCompensationRequest) returns (ComplaintCompensationResponse);
 }
 
 message NewCompanyRequest {
@@ -21,6 +22,15 @@ message CreateWalletForNewCompanyResponse {
   bool status = 1;
 }
 
+message ComplaintCompensationRequest {
+  string clientCompanyId = 1;
+  string plantationCompanyId = 2;
+  string invoiceId = 3;
+  int32 amount = 4;
+  int32 complaintId = 5;
+}
+
+message ComplaintCompensationResponse {}
 
 message StartSimplePayOrderPayoutRequest {
   string company_id = 1;

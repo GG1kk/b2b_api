@@ -30,6 +30,7 @@ type WalletServiceClient interface {
 	PerformRefund(ctx context.Context, in *PerformRefundRequest, opts ...grpc.CallOption) (*PerformRefundResponse, error)
 	StartSimplePayOrderPayout(ctx context.Context, in *StartSimplePayOrderPayoutRequest, opts ...grpc.CallOption) (*StartSimplePayOrderResponse, error)
 	CreateWalletForNewCompany(ctx context.Context, in *NewCompanyRequest, opts ...grpc.CallOption) (*CreateWalletForNewCompanyResponse, error)
+	ComplaintCompensation(ctx context.Context, in *ComplaintCompensationRequest, opts ...grpc.CallOption) (*ComplaintCompensationResponse, error)
 }
 
 type walletServiceClient struct {
@@ -112,6 +113,15 @@ func (c *walletServiceClient) CreateWalletForNewCompany(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *walletServiceClient) ComplaintCompensation(ctx context.Context, in *ComplaintCompensationRequest, opts ...grpc.CallOption) (*ComplaintCompensationResponse, error) {
+	out := new(ComplaintCompensationResponse)
+	err := c.cc.Invoke(ctx, "/WalletService/ComplaintCompensation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServiceServer is the server API for WalletService service.
 // All implementations must embed UnimplementedWalletServiceServer
 // for forward compatibility
@@ -124,6 +134,7 @@ type WalletServiceServer interface {
 	PerformRefund(context.Context, *PerformRefundRequest) (*PerformRefundResponse, error)
 	StartSimplePayOrderPayout(context.Context, *StartSimplePayOrderPayoutRequest) (*StartSimplePayOrderResponse, error)
 	CreateWalletForNewCompany(context.Context, *NewCompanyRequest) (*CreateWalletForNewCompanyResponse, error)
+	ComplaintCompensation(context.Context, *ComplaintCompensationRequest) (*ComplaintCompensationResponse, error)
 	mustEmbedUnimplementedWalletServiceServer()
 }
 
@@ -154,6 +165,9 @@ func (UnimplementedWalletServiceServer) StartSimplePayOrderPayout(context.Contex
 }
 func (UnimplementedWalletServiceServer) CreateWalletForNewCompany(context.Context, *NewCompanyRequest) (*CreateWalletForNewCompanyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWalletForNewCompany not implemented")
+}
+func (UnimplementedWalletServiceServer) ComplaintCompensation(context.Context, *ComplaintCompensationRequest) (*ComplaintCompensationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ComplaintCompensation not implemented")
 }
 func (UnimplementedWalletServiceServer) mustEmbedUnimplementedWalletServiceServer() {}
 
@@ -312,6 +326,24 @@ func _WalletService_CreateWalletForNewCompany_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WalletService_ComplaintCompensation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ComplaintCompensationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).ComplaintCompensation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WalletService/ComplaintCompensation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).ComplaintCompensation(ctx, req.(*ComplaintCompensationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WalletService_ServiceDesc is the grpc.ServiceDesc for WalletService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -350,6 +382,10 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateWalletForNewCompany",
 			Handler:    _WalletService_CreateWalletForNewCompany_Handler,
+		},
+		{
+			MethodName: "ComplaintCompensation",
+			Handler:    _WalletService_ComplaintCompensation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
