@@ -4,6 +4,7 @@ option go_package = "rpc/setting;setting";
 
 service SettingsService {
   rpc GetPlantationIdsWithDisplayEnabled(Empty) returns (GetPlantationIdsWithDisplayEnabledReply);
+  rpc GetActiveByDayPlantations(Empty) returns (GetPlantationIdsWithDisplayEnabledReply);
   rpc GetCargoByID(GetCargoByIDRequest) returns (GetCargoByIDReply);
   rpc GetBasicSettings(Empty) returns (GetBasicSettingsReply);
   rpc GetCountryCode(GetCountryCodeRequest) returns (GetCountryCodeReply);
