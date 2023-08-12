@@ -26,6 +26,7 @@ type CatalogServiceClient interface {
 	GetSizeInfo(ctx context.Context, in *GetSizeInfoRequest, opts ...grpc.CallOption) (*GetSizeInfoReply, error)
 	GetCurrentSeasonByPlantationID(ctx context.Context, in *GetCurrentSeasonByPlantationIDRequest, opts ...grpc.CallOption) (*GetCurrentSeasonByPlantationIDReply, error)
 	GetVarietyName(ctx context.Context, in *GetVarietyNameRequest, opts ...grpc.CallOption) (*GetVarietyNameResponse, error)
+	GetProductName(ctx context.Context, in *GetProductNameRequest, opts ...grpc.CallOption) (*GetProductNameResponse, error)
 }
 
 type catalogServiceClient struct {
@@ -72,6 +73,15 @@ func (c *catalogServiceClient) GetVarietyName(ctx context.Context, in *GetVariet
 	return out, nil
 }
 
+func (c *catalogServiceClient) GetProductName(ctx context.Context, in *GetProductNameRequest, opts ...grpc.CallOption) (*GetProductNameResponse, error) {
+	out := new(GetProductNameResponse)
+	err := c.cc.Invoke(ctx, "/CatalogService/GetProductName", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CatalogServiceServer is the server API for CatalogService service.
 // All implementations must embed UnimplementedCatalogServiceServer
 // for forward compatibility
@@ -80,6 +90,7 @@ type CatalogServiceServer interface {
 	GetSizeInfo(context.Context, *GetSizeInfoRequest) (*GetSizeInfoReply, error)
 	GetCurrentSeasonByPlantationID(context.Context, *GetCurrentSeasonByPlantationIDRequest) (*GetCurrentSeasonByPlantationIDReply, error)
 	GetVarietyName(context.Context, *GetVarietyNameRequest) (*GetVarietyNameResponse, error)
+	GetProductName(context.Context, *GetProductNameRequest) (*GetProductNameResponse, error)
 	mustEmbedUnimplementedCatalogServiceServer()
 }
 
@@ -98,6 +109,9 @@ func (UnimplementedCatalogServiceServer) GetCurrentSeasonByPlantationID(context.
 }
 func (UnimplementedCatalogServiceServer) GetVarietyName(context.Context, *GetVarietyNameRequest) (*GetVarietyNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVarietyName not implemented")
+}
+func (UnimplementedCatalogServiceServer) GetProductName(context.Context, *GetProductNameRequest) (*GetProductNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductName not implemented")
 }
 func (UnimplementedCatalogServiceServer) mustEmbedUnimplementedCatalogServiceServer() {}
 
@@ -184,6 +198,24 @@ func _CatalogService_GetVarietyName_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CatalogService_GetProductName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProductNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatalogServiceServer).GetProductName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/CatalogService/GetProductName",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatalogServiceServer).GetProductName(ctx, req.(*GetProductNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CatalogService_ServiceDesc is the grpc.ServiceDesc for CatalogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -206,6 +238,10 @@ var CatalogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetVarietyName",
 			Handler:    _CatalogService_GetVarietyName_Handler,
+		},
+		{
+			MethodName: "GetProductName",
+			Handler:    _CatalogService_GetProductName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
