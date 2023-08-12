@@ -6,10 +6,20 @@ service CatalogService {
   rpc GetCatalogProductByID(GetCatalogProductByIDRequest) returns (GetCatalogProductByIDReply);
   rpc GetSizeInfo(GetSizeInfoRequest) returns (GetSizeInfoReply);
   rpc GetCurrentSeasonByPlantationID(GetCurrentSeasonByPlantationIDRequest) returns (GetCurrentSeasonByPlantationIDReply);
+  rpc GetVarietyName(GetVarietyNameRequest) returns (GetVarietyNameResponse);
 }
 
 message GetCatalogProductByIDRequest {
   string id = 1;
+}
+
+message GetVarietyNameRequest {
+  string product_id = 1;
+  string variety_id = 2;
+}
+
+message GetVarietyNameResponse {
+  string variety_name = 1;
 }
 
 message GetCurrentSeasonByPlantationIDRequest {
