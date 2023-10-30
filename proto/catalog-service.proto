@@ -8,8 +8,23 @@ service CatalogService {
   rpc GetCurrentSeasonByPlantationID(GetCurrentSeasonByPlantationIDRequest) returns (GetCurrentSeasonByPlantationIDReply);
   rpc GetVarietyName(GetVarietyNameRequest) returns (GetVarietyNameResponse);
   rpc GetProductName(GetProductNameRequest) returns (GetProductNameResponse);
+
+  //new
+  rpc GetProductAngVarietyNameWithImageURLAndColorId(GetProductAngVarietyNameWithImageURLAndColorIdRequest) returns(GetProductAngVarietyNameWithImageURLAndColorIdResponse);
 }
 
+
+message GetProductAngVarietyNameWithImageURLAndColorIdRequest {
+  string productId = 1;
+  string varietyId = 2;
+}
+
+message GetProductAngVarietyNameWithImageURLAndColorIdResponse {
+  string productName = 1;
+  string varietyName = 2;
+  string imageURL = 3;
+  string colorId = 4;
+}
 
 message GetProductNameRequest {
   string id = 1;
