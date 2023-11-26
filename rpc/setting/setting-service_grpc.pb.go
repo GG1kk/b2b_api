@@ -27,6 +27,7 @@ type SettingsServiceClient interface {
 	GetCargoByID(ctx context.Context, in *GetCargoByIDRequest, opts ...grpc.CallOption) (*GetCargoByIDReply, error)
 	GetBasicSettings(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetBasicSettingsReply, error)
 	GetCountryCode(ctx context.Context, in *GetCountryCodeRequest, opts ...grpc.CallOption) (*GetCountryCodeReply, error)
+	GetCountryNameByID(ctx context.Context, in *GetCountryNameByIDRequest, opts ...grpc.CallOption) (*GetCountryNameByIDResponse, error)
 }
 
 type settingsServiceClient struct {
@@ -82,6 +83,15 @@ func (c *settingsServiceClient) GetCountryCode(ctx context.Context, in *GetCount
 	return out, nil
 }
 
+func (c *settingsServiceClient) GetCountryNameByID(ctx context.Context, in *GetCountryNameByIDRequest, opts ...grpc.CallOption) (*GetCountryNameByIDResponse, error) {
+	out := new(GetCountryNameByIDResponse)
+	err := c.cc.Invoke(ctx, "/SettingsService/GetCountryNameByID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SettingsServiceServer is the server API for SettingsService service.
 // All implementations must embed UnimplementedSettingsServiceServer
 // for forward compatibility
@@ -91,6 +101,7 @@ type SettingsServiceServer interface {
 	GetCargoByID(context.Context, *GetCargoByIDRequest) (*GetCargoByIDReply, error)
 	GetBasicSettings(context.Context, *Empty) (*GetBasicSettingsReply, error)
 	GetCountryCode(context.Context, *GetCountryCodeRequest) (*GetCountryCodeReply, error)
+	GetCountryNameByID(context.Context, *GetCountryNameByIDRequest) (*GetCountryNameByIDResponse, error)
 	mustEmbedUnimplementedSettingsServiceServer()
 }
 
@@ -112,6 +123,9 @@ func (UnimplementedSettingsServiceServer) GetBasicSettings(context.Context, *Emp
 }
 func (UnimplementedSettingsServiceServer) GetCountryCode(context.Context, *GetCountryCodeRequest) (*GetCountryCodeReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCountryCode not implemented")
+}
+func (UnimplementedSettingsServiceServer) GetCountryNameByID(context.Context, *GetCountryNameByIDRequest) (*GetCountryNameByIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCountryNameByID not implemented")
 }
 func (UnimplementedSettingsServiceServer) mustEmbedUnimplementedSettingsServiceServer() {}
 
@@ -216,6 +230,24 @@ func _SettingsService_GetCountryCode_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SettingsService_GetCountryNameByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCountryNameByIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServiceServer).GetCountryNameByID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/SettingsService/GetCountryNameByID",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServiceServer).GetCountryNameByID(ctx, req.(*GetCountryNameByIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SettingsService_ServiceDesc is the grpc.ServiceDesc for SettingsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +274,10 @@ var SettingsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCountryCode",
 			Handler:    _SettingsService_GetCountryCode_Handler,
+		},
+		{
+			MethodName: "GetCountryNameByID",
+			Handler:    _SettingsService_GetCountryNameByID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

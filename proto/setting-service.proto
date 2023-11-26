@@ -8,6 +8,15 @@ service SettingsService {
   rpc GetCargoByID(GetCargoByIDRequest) returns (GetCargoByIDReply);
   rpc GetBasicSettings(Empty) returns (GetBasicSettingsReply);
   rpc GetCountryCode(GetCountryCodeRequest) returns (GetCountryCodeReply);
+  rpc GetCountryNameByID(GetCountryNameByIDRequest) returns (GetCountryNameByIDResponse);
+}
+
+message GetCountryNameByIDRequest {
+  string id = 1;
+}
+
+message GetCountryNameByIDResponse {
+  string name = 1;
 }
 
 message GetCountryCodeRequest {
