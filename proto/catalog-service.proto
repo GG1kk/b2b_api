@@ -8,22 +8,25 @@ service CatalogService {
   rpc GetCurrentSeasonByPlantationID(GetCurrentSeasonByPlantationIDRequest) returns (GetCurrentSeasonByPlantationIDReply);
   rpc GetVarietyName(GetVarietyNameRequest) returns (GetVarietyNameResponse);
   rpc GetProductName(GetProductNameRequest) returns (GetProductNameResponse);
+  rpc GetProductAndVarietyNameWithImageURLAndColorId(GetProductAndVarietyNameWithImageURLAndColorIdRequest) returns (GetProductAndVarietyNameWithImageURLAndColorIdResponse);
 
-  //new
-  rpc GetProductAngVarietyNameWithImageURLAndColorId(GetProductAngVarietyNameWithImageURLAndColorIdRequest) returns(GetProductAngVarietyNameWithImageURLAndColorIdResponse);
 }
 
-
-message GetProductAngVarietyNameWithImageURLAndColorIdRequest {
-  string productId = 1;
-  string varietyId = 2;
+message GetProductAndVarietyNameWithImageURLAndColorIdRequest {
+  string productID = 1;
+  string varietyID = 2;
+  string companyID = 3;
+  string size = 4;
 }
 
-message GetProductAngVarietyNameWithImageURLAndColorIdResponse {
+message GetProductAndVarietyNameWithImageURLAndColorIdResponse {
   string productName = 1;
   string varietyName = 2;
-  string imageURL = 3;
-  string colorId = 4;
+  string imgURL = 3;
+  string color = 4;
+  int32 inFullBox = 6;
+  int32 inPack = 7;
+  int32 inBunch = 8;
 }
 
 message GetProductNameRequest {
@@ -79,6 +82,7 @@ message GetSizeInfoReply {
   int32 price = 1;
   int32 in_pack = 2;
   int32 in_full_box = 3;
+  int32 in_bunch = 4;
 }
 
 message GetCatalogProductByIDReply {

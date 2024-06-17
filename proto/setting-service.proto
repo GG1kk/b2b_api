@@ -9,6 +9,15 @@ service SettingsService {
   rpc GetBasicSettings(Empty) returns (GetBasicSettingsReply);
   rpc GetCountryCode(GetCountryCodeRequest) returns (GetCountryCodeReply);
   rpc GetCountryNameByID(GetCountryNameByIDRequest) returns (GetCountryNameByIDResponse);
+  rpc GetPlantationVisibleByCompanyID(GetPlantationVisibleByCompanyIDRequest) returns (GetPlantationVisibleByCompanyIDResponse);
+}
+
+message GetPlantationVisibleByCompanyIDRequest {
+  string company_id = 1;
+}
+
+message GetPlantationVisibleByCompanyIDResponse {
+  bool visible_for_all = 1;
 }
 
 message GetCountryNameByIDRequest {
